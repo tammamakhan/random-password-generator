@@ -45,7 +45,7 @@ function promptPasswordLength() {
   // Must be a valid number
   if (!passwordLen.trim() || isNaN(passwordLen)) {
     alert("Password length must be provided as a number.");
-    promptPasswordLength();
+    return promptPasswordLength();
   }
 
   passwordLen = parseInt(passwordLen);
@@ -53,13 +53,13 @@ function promptPasswordLength() {
   // Must be at least 8
   if (passwordLen < 8) {
     alert("Password must be at least 8 characters.");
-    promptPasswordLength();
+    return promptPasswordLength();
   }
 
   // At most 128
   if (passwordLen > 128) {
     alert("Password must be at most 128 characters.");
-    promptPasswordLength();
+    return promptPasswordLength();
   }
 
   // Return the valid password length
@@ -85,7 +85,7 @@ function promptCharacterTypes() {
   // Must select at least one of the character types
   if (!confirmLower && !confirmUpper && !confirmNumeric && !confirmSpecial) {
     alert("Must select at least one character type.");
-    promptCharacterTypes();
+    return promptCharacterTypes();
   }
 
   // Return character type user inputs
