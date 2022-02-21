@@ -32,29 +32,39 @@ function promptPasswordLength() {
 // Function to prompt user for character types
 function promptCharacterTypes() {
   // Prompt user for lowercase, uppercase, numeric, and/or special characters
-  var hasLower = confirm("Click OK to confirm including lowercase characters.");
-  var hasUpper = confirm("Click OK to confirm including uppercase characters.");
-  var hasNumeric = confirm("Click OK to confirm including numeric characters.");
-  var hasSpecial = confirm("Click OK to confirm including special characters.");
+  var confirmLower = confirm(
+    "Click OK to confirm including lowercase characters."
+  );
+  var confirmUpper = confirm(
+    "Click OK to confirm including uppercase characters."
+  );
+  var confirmNumeric = confirm(
+    "Click OK to confirm including numeric characters."
+  );
+  var confirmSpecial = confirm(
+    "Click OK to confirm including special characters."
+  );
 
   // Must select at least one of the character types
-  if (!hasLower && !hasUpper && !hasNumeric && !hasSpecial) {
+  if (!confirmLower && !confirmUpper && !confirmNumeric && !confirmSpecial) {
     alert("Must select at least one character type.");
     promptCharacterTypes();
   }
 
   // Return character type user inputs
   return {
-    hasLower: hasLower,
-    hasUpper: hasUpper,
-    hasNumeric: hasNumeric,
-    hasSpecial: hasSpecial,
+    hasLower: confirmLower,
+    hasUpper: confirmUpper,
+    hasNumeric: confirmNumeric,
+    hasSpecial: confirmSpecial,
   };
 }
 
+// Function to generate a random password
 function generatePassword() {
   // Prompt user for number of characters in the password and store in variable passwordLen
   var passwordLen = promptPasswordLength();
+  console.log("Password length: " + passwordLen);
 
   // Prompt user for character types
   var charTypes = promptCharacterTypes();
