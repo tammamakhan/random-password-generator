@@ -43,7 +43,7 @@ function promptPasswordLength() {
   );
 
   // Must be a valid number
-  if (isNaN(passwordLen)) {
+  if (!passwordLen.trim() || isNaN(passwordLen)) {
     alert("Password length must be provided as a number.");
     promptPasswordLength();
   }
