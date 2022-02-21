@@ -1,3 +1,40 @@
+// Global variables
+var specialCharacters = [
+  " ",
+  "!",
+  '"',
+  "#",
+  "$",
+  "%",
+  "&",
+  "'",
+  "(",
+  ")",
+  "*",
+  "+",
+  ",",
+  "-",
+  ".",
+  "/",
+  ":",
+  ";",
+  "<",
+  "=",
+  ">",
+  "?",
+  "@",
+  "[",
+  "\\",
+  "]",
+  "^",
+  "_",
+  "`",
+  "{",
+  "|",
+  "}",
+  "~",
+];
+
 // Function to prompt the user for the password length
 function promptPasswordLength() {
   // Prompt user for password length
@@ -60,15 +97,56 @@ function promptCharacterTypes() {
   };
 }
 
-// Function to generate a random password
+// Function to generate all possible character options for the given user criteria
+function generateOptions(charTypes) {
+  var options = [];
+
+  // Check for lowercase characters
+  if (charTypes.hasLower) {
+    for (let i = 97; i <= 122; i++) {
+      options.push(String.fromCharCode(i));
+    }
+  }
+
+  // Check for uppercase characters
+  if (charTypes.hasUpper) {
+    for (let i = 65; i <= 90; i++) {
+      options.push(String.fromCharCode(i));
+    }
+  }
+
+  // Check for numeric characters
+  if (charTypes.hasNumeric) {
+    for (let i = 48; i <= 57; i++) {
+      options.push(String.fromCharCode(i));
+    }
+  }
+
+  // Check for special characters
+  if (charTypes.hasSpecial) {
+    options = options.concat(specialCharacters);
+  }
+
+  return options;
+}
+
+// Function to prompt user for password criteria and generate a random password
 function generatePassword() {
   // Prompt user for number of characters in the password and store in variable passwordLen
   var passwordLen = promptPasswordLength();
-  console.log("Password length: " + passwordLen);
 
   // Prompt user for character types
   var charTypes = promptCharacterTypes();
-  console.log(charTypes);
+
+  // Generate a randomized password matching the selected user criteria
+  var options = generateOptions(charTypes);
+  var password = [];
+  for (let i = 0; i < passwordLen; i++) {
+    password.push(options[Math.floor(Math.random() * options.length)]);
+  }
+
+  // Return the randomly generated password
+  return password.join("");
 }
 
 // Get references to the #generate element
